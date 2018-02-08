@@ -25,10 +25,13 @@ yarn-error.log*
 .vs/
 *.VC.db
 *.VC.VC.opendb
-
+x64/
+x86/
 [Rr]elease/
 [Dd]ebug/
 [Ll]uftBallon/x64/
 [Ll]uftBallon/x86/
 [Ll]uftBallon/[Rr]elease/
 [Ll]uftBallon/[Dd]ebug/
+!glew-2.1.0/lib/Release/
+!glew-2.1.0/bin/Release/

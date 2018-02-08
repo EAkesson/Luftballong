@@ -1,4 +1,0 @@
-﻿  GUi.cpp
-GUi.obj : error LNK2001: unresolved external symbol _glfwTerminate
-GUi.obj : error LNK2001: unresolved external symbol _glfwInit
-C:\Users\erikp\Documents\Projekt\Heissluftballon\LuftBallon\Release\LuftBallon.exe : fatal error LNK1120: 2 unresolved externals
