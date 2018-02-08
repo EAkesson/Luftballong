@@ -22,7 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.vs
-.VC.db
-.VC.VC.opendb
+.vs/
+*.VC.db
+*.VC.VC.opendb
 x64/
+LuftBallon/x64/
+LuftBallon/Release/
