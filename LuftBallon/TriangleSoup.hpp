@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <SOIL.h>
 #ifdef __WIN32__
-#include <GL/glext.h>
+#include <stegukod/glext.h>
 #endif
 
 //#include "tnm061.hpp"  // To be able to use OpenGL extensions

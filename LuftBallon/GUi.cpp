@@ -6,9 +6,9 @@
 #include <glm/fwd.hpp> // Header file
 #include <glm/glm.hpp> // Source file
 #include "TriangleSoup.hpp"
-#include "Shader.hpp"
-//#include "Texture.hpp"
-#include "Utilities.hpp"
+#include "stegukod/Shader.hpp"
+#include "stegukod/Texture.hpp"
+#include "stegukod/Utilities.hpp"
 
 
 
@@ -38,27 +38,27 @@ int main() {
 
 	// Objects
 	TriangleSoup ball;
-	/*Shader MyShader;
+	Shader MyShader;
 	GLuint colorBufferID, vertexArrayID, vertexBufferID, indexBufferID;
 	
 	MyShader.createShader("stegukod/vertex.glsl", "stegukod/fragment.glsl");
 	GLint locationTime = glGetUniformLocation(MyShader.programID, "time");
 
 	ball.createSphere(2, 10);
-	glEnable(GL_DEPTH_TEST);*/
+	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(window)) // Eventloop for window
 	{
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
-		/*glUseProgram(MyShader.programID);
+		glUseProgram(MyShader.programID);
 		glUniform1f(locationTime, glfwGetTime());
 		glfwGetWindowSize(window, &width, &height);
 		glViewport(0, 0, width, height);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glBindVertexArray(vertexArrayID);*/
+		glBindVertexArray(vertexArrayID);
 		
 		ball.render();
 

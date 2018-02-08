@@ -21,10 +21,13 @@
     <ClCompile Include="TriangleSoup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="stegukod\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities.cpp">
+    <ClCompile Include="stegukod\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stegukod\Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,18 +35,21 @@
     <ClInclude Include="TriangleSoup.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.hpp">
+    <ClInclude Include="stegukod\Shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities.hpp">
+    <ClInclude Include="stegukod\Texture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stegukod\Utilities.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment.glsl">
+    <None Include="stegukod\fragment.glsl">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="vertex.glsl">
+    <None Include="stegukod\vertex.glsl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

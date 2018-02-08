@@ -130,18 +130,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GUi.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="stegukod\Shader.cpp" />
+    <ClCompile Include="stegukod\Texture.cpp" />
+    <ClCompile Include="stegukod\Utilities.cpp" />
     <ClCompile Include="TriangleSoup.cpp" />
-    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="stegukod\Shader.hpp" />
+    <ClInclude Include="stegukod\Texture.hpp" />
+    <ClInclude Include="stegukod\Utilities.hpp" />
     <ClInclude Include="TriangleSoup.hpp" />
-    <ClInclude Include="Utilities.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment.glsl" />
-    <None Include="vertex.glsl" />
+    <None Include="stegukod\fragment.glsl" />
+    <None Include="stegukod\vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -22,7 +22,7 @@
 #ifdef __WIN32__
 // Windows installations usually lack an up-to-date OpenGL extension header,
 // so make sure to supply your own, or at least make sure it's of a recent date.
-#include <GL/glext.h>
+#include <stegukod/glext.h>
 /* Global function pointers for everything we need beyond OpenGL 1.1.
  * This is a requirement from Microsoft Windows. Other platforms have
  * proper built-in support for modern OpenGL, and don't need this.
