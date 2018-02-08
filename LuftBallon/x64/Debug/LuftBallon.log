@@ -1,0 +1,4 @@
+﻿  GUi.cpp
+GUi.obj : error LNK2019: unresolved external symbol glfwInit referenced in function main
+GUi.obj : error LNK2019: unresolved external symbol glfwTerminate referenced in function main
+C:\Users\erikp\Documents\Projekt\Heissluftballon\LuftBallon\x64\Debug\LuftBallon.exe : fatal error LNK1120: 2 unresolved externals
