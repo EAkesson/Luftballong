@@ -37,6 +37,7 @@ int main() {
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) //If fullscreen is used
 			glfwSetWindowShouldClose(window, GL_TRUE); 
 		// Hello everybody, this is a Git test comment
+		// Is it working?!?!
 		
 	}
 	glfwTerminate(); //Terminate the GLFW process
