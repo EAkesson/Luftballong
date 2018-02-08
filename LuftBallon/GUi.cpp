@@ -6,6 +6,9 @@
 #include <glm/fwd.hpp> // Header file
 #include <glm/glm.hpp> // Source file
 #include "TriangleSoup.hpp"
+#include "stegukod/Shader.hpp"
+#include "stegukod/Texture.hpp"
+
 
 
 
