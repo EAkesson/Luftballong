@@ -22,7 +22,7 @@ int main() {
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	//GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", nullptr, nullptr); // Windowed
+	//GLFWwindow* window = glfwCreateWindow(1920, 1080, "OpenGL", nullptr, nullptr); // Windowed
 	GLFWwindow* window = glfwCreateWindow(1920, 1080, "OpenGL", glfwGetPrimaryMonitor(), nullptr); // Fullscreen
 	glfwMakeContextCurrent(window); // Make OpenGL context active
 
