@@ -34,4 +34,5 @@ x86/
 [Ll]uftBallon/[Rr]elease/
 [Ll]uftBallon/[Dd]ebug/
 !glew-2.1.0/lib/Release/
+!glew-2.1.0/lib/Release/x64/
 !glew-2.1.0/bin/Release/
