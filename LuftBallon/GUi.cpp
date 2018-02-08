@@ -11,7 +11,7 @@
 
 
 int main() {
-	
+
 	glfwInit(); //Start the GLFW process
 
 	//Setting GLFW options require OpenGL 3.2
@@ -36,7 +36,7 @@ int main() {
 
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) //If fullscreen is used
 			glfwSetWindowShouldClose(window, GL_TRUE); 
-		
+		// Hej allesammans
 		
 	}
 	glfwTerminate(); //Terminate the GLFW process
