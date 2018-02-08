@@ -29,6 +29,12 @@ int main() {
 	glewExperimental = GL_TRUE; //Force GLEW to use a modern OpenGL
 	glewInit();	// Use GLEW
 
+	//Objects
+	TriangleSoup ball;
+	ball.createSphere(2,10);
+	ball.printInfo();
+	
+
 	while (!glfwWindowShouldClose(window)) //Eventloop for window
 	{
 		glfwSwapBuffers(window);
