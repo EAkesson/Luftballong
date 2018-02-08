@@ -1,10 +1,11 @@
+#include <glew.h>
 #include <GLFW/glfw3.h>
-
+#include <SOIL.h>
 #ifdef __WIN32__
 #include <GL/glext.h>
 #endif
 
-#include "tnm061.hpp"  // To be able to use OpenGL extensions
+//#include "tnm061.hpp"  // To be able to use OpenGL extensions
 
 
 /* A struct to hold geometry data and send it off for rendering */

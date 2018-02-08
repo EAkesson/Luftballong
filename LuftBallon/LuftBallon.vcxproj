@@ -130,6 +130,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GUi.cpp" />
+    <ClCompile Include="TriangleSoup.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TriangleSoup.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
