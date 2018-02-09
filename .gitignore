@@ -1,0 +1,38 @@
+-# See https://help.github.com/ignore-files/ for more about ignoring files.
+ -
+ -# dependencies
+ -/node_modules
+ -
+ -# testing
+ -/coverage
+ -
+ -# production
+ -/build
+ -
+ -# misc
+ -.DS_Store
+ -.env.local
+ -.env.development.local
+ -.env.test.local
+ -.env.production.local
+ -.sublime-workspace
+ -.idea
+ -
+ -npm-debug.log*
+ -yarn-debug.log*
+ -yarn-error.log*
+ -
+ -.vs/
+ -*.VC.db
+ -*.VC.VC.opendb
+ -x64/
+ -x86/
+ -[Rr]elease/
+ -[Dd]ebug/
+ -[Ll]uftBallon/x64/
+ -[Ll]uftBallon/x86/
+ -[Ll]uftBallon/[Rr]elease/
+ -[Ll]uftBallon/[Dd]ebug/
+ -!glew-2.1.0/lib/Release/
+ -!glew-2.1.0/lib/Release/x64/
+ -!glew-2.1.0/bin/Release/
