@@ -1,125 +1,82 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Luftballong</title>
-        <style>
-            html, body { margin: 0; padding: 0; overflow: hidden; }
-        </style>
-    </head>
+<head>
+	<title>Luftballong</title>
+	<style>
+		html, body { margin: 0; padding: 0; overflow: hidden; }
+	</style>
+</head>
 
-    <body>
-        <script src="js/three.js"></script>
-        <script>
-            // Javascript will go here.
+<body>
+<script src="js/three.js"></script>
+<script src="Constants.js"></script>
+<script src="Calcforces.js"></script>
+<script>
+	// Javascript will go here.
+	Calcforces();
+	// Create scene, camera, renderer
+	var scene = new THREE.Scene();
+	var aspect = window.innerWidth / window.innerHeight; // (what is this?)
+	var camera = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 );
+	var renderer = new THREE.WebGLRenderer();
+	renderer.setSize( window.innerWidth, window.innerHeight );
 
-            // Create scene, camera, renderer
-            var scene = new THREE.Scene();
-            var aspect = window.innerWidth / window.innerHeight; // (what is this?)
-            var camera = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 );
-            var renderer = new THREE.WebGLRenderer();
-            renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
 
-<<<<<<< HEAD
-      // Set camera position
-	  camera.rotateX(-Math.PI / 4);
-	  camera.position.y = 6;
-      camera.position.z = 7;
+	// Set camera position
+	camera.position.z = 5;
 
-      // Camera controls
-	  var controls = new THREE.OrbitControls(camre);
+	// Create ground plane
 
-      // Create a sky dome
-	  var skyGeometry = new THREE.SphereGeometry(20, 25, 25);
-	  var skyMaterial = new THREE.MeshBasicMaterial({color: 0x5C5CFF, side: THREE.BackSide });
-	  var sky = new THREE.Mesh(skyGeometry, skyMaterial);
-	  scene.add(sky);
+	// Load balloon
+	var loader = new THREE.ObjectLoader();
 
-	  // Create sphere and add it to scene
-	  var geometry_sphere = new THREE.SphereGeometry(1, 32, 32 );
-	  var material = new THREE.MeshNormalMaterial();
-	  var sphere = new THREE.Mesh( geometry_sphere, material );
-	  scene.add( sphere );
+	loader.load(".json", function( group ) {
+		mesh = group.children[0];
+		mesh.material = new THREE.MeshPhongMaterial();
+		scene.add( mesh );
+	});
 
-      // Create ground plane
-	  /* Define a geometry and material for the plane and then
-	  create the actual plane as a THREE Mesh. For the plane to
-	  act as ground it has to be rotated around the X-axis. */
-	  var planeGeometry = new THREE.PlaneGeometry(10, 10, 32);
-	  var planeMaterial = new THREE.MeshBasicMaterial({color: 0xADFF2F, side: THREE.DoubleSide});
-	  var plane = new THREE.Mesh(planeGeometry,planeMaterial);
-	  plane.rotateX(-Math.PI / 2);
-	  scene.add(plane);
+	// Create sphere and add it to scene
+	var geometry_sphere = new THREE.SphereGeometry(1, 32, 32 );
+	var material = new THREE.MeshNormalMaterial();
+	var balloon = new THREE.Mesh( geometry_sphere, material );
+	scene.add( balloon );
 
+	// WASD
+	document.addEventListener("keydown", onDocumentKeyDown, false);
+	function onDocumentKeyDown(event) {
+		var keyCode = event.which;
+		// up
+		if (keyCode == 87) {
+			balloon.position.y += 1;
+			// down
+		} else if (keyCode == 83) {
+			balloon.position.y -= 1;
+			// left
+		} else if (keyCode == 65) {
+			balloon.position.x -= 1;
+			// right
+		} else if (keyCode == 68) {
+			balloon.position.x += 1;
+			// space
+		} else if (keyCode == 32) {
+			balloon.position.x = 0.0;
+			balloon.position.y = 0.0;
+		}
+		render();
+	};
 
+	// Render function
+	var render = function () {
+		requestAnimationFrame( render );
+		// add cool animation like:
+		balloon.rotation.x += 0.1;
+		balloon.rotation.y += 0.1;
+		renderer.render( scene, camera );
+	};
+	render();
 
-
-      // Render function
-      var render = function () {
-      	requestAnimationFrame( render );
-
-        // Desired animations should be put here:
-
-        renderer.render( scene, camera );
-      };
-      render();
-=======
-            document.body.appendChild( renderer.domElement );
-
-            // Set camera position
-            camera.position.z = 5;
-
-            // Create ground plane
-
-            // Load balloon
-            var loader = new THREE.ObjectLoader();
-
-            loader.load(".json", function( group ) {
-            mesh = group.children[0];
-            mesh.material = new THREE.MeshPhongMaterial();
-            scene.add( mesh );
-            });
-
-            // Create sphere and add it to scene
-            var geometry_sphere = new THREE.SphereGeometry(1, 32, 32 );
-            var material = new THREE.MeshNormalMaterial();
-            var sphere = new THREE.Mesh( geometry_sphere, material );
-            scene.add( sphere );
-
-            // WASD
-            document.addEventListener("keydown", onDocumentKeyDown, false);
-            function onDocumentKeyDown(event) {
-            var keyCode = event.which;
-            // up
-            if (keyCode == 87) {
-            sphere.position.y += 1;
-            // down
-            } else if (keyCode == 83) {
-            sphere.position.y -= 1;
-            // left
-            } else if (keyCode == 65) {
-            sphere.position.x -= 1;
-            // right
-            } else if (keyCode == 68) {
-            sphere.position.x += 1;
-            // space
-            } else if (keyCode == 32) {
-            sphere.position.x = 0.0;
-            sphere.position.y = 0.0;
-            }
-            render();
-            };
->>>>>>> f0c4bdf0d11e739a803ec4a03baca1ac2d818cc4
-
-            // Render function
-            var render = function () {
-            requestAnimationFrame( render );
-            // add cool animation like:
-            sphere.rotation.x += 0.1;
-            sphere.rotation.y += 0.1;
-            renderer.render( scene, camera );
-            };
-            render();
-
-        </script>
-    </body>
+</script>
+</body>
 </html>
