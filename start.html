@@ -11,7 +11,7 @@
 
 		<!-- Include sources here -->
         <script src="js/three.js"></script>
-		<script src ="js/OBJLoader.js"></script>
+		<script src ="js/loaders/OBJLoader.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 
         <script> // ************** JavaScript **************
@@ -79,7 +79,7 @@
             // Load balloon
 /*            var loader = new THREE.OBJLoader();
             loader.load("balloon/Air_Balloon.obj", function( group ) {
-				var obj = group.children[0];
+				obj = group.children[0];
 				obj.material = new THREE.MeshPhongMaterial();
 				obj.color = new THREE.Color(0x00ff00);
 				scene.add( obj );
