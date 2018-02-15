@@ -39,7 +39,7 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 
-			// Implement OrbitControls
+			// OrbitControls
 			controls = new THREE.OrbitControls(camera, renderer.domElement);
 			controls.addEventListener('change', render);
 			controls.autoRotate = true;

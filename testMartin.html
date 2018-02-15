@@ -19,6 +19,7 @@
 	var aspect, camera, scene, renderer, controls;
 
 	init();
+	loadWorld()
 	animate();
 
 	function init() {
@@ -39,27 +40,85 @@
 		// Implement OrbitControls
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		controls.addEventListener('change', render);
-		controls.autoRotate = true;
+		controls.autoRotate = false;
 		controls.autoRotateSpeed = 2.0;
 		controls.enableZoom = true;
 
+		// Audio Source
+		var audioSource = new Audio("audio/blipblop.ogg");
+		audioSource.loop = true;
+		audioSource.play();
 
-		// Create a test box and add it to scene
-		var geometry = new THREE.BoxGeometry(5, 5, 5);
-		var material = new THREE.MeshNormalMaterial();
-		var box = new THREE.Mesh( geometry, material );
-		scene.add( box );
+
 	}
 
+	/* Define the object variables that will be added to the scene here. If defined within
+	the function, the other functions will not be able to reach them.
+	Materials, textures etc. can still be defined within the function. */
+	var sky, plane, box;
+
+	/* Load objects and meshes into the scene here
+	NOTE: Chrome is shit and won't let you use textures unless you use a virtual server.*/
+	function loadWorld() {
+
+		// Create a clear blue sky dome
+		var skyGeometry = new THREE.SphereGeometry(500, 50, 50);
+
+		/* ******** SKY ********
+		Leave this commented out if using Google Chrome
+		var skyTexture = new THREE.TextureLoader().load( "textures/sky.jpg" );
+		var skyMaterial =  new THREE.MeshBasicMaterial( {map: skyTexture} );
+		   ********************** */
+
+		var skyMaterial = new THREE.MeshBasicMaterial({color: 0xd3d3d3});
+
+		sky = new THREE.Mesh(skyGeometry, skyMaterial);
+		sky.material.side = THREE.BackSide;
+		scene.add(sky);
+
+		// Create an ugly test box
+		var boxGeometry = new THREE.BoxGeometry(5, 5, 5);
+		var boxMaterial = new THREE.MeshNormalMaterial();
+		box = new THREE.Mesh( boxGeometry, boxMaterial );
+		scene.add( box );
+
+		// Create a grassy ground plane
+		var planeGeometry =  new THREE.PlaneGeometry(500, 500, 100, 100);
+
+		/* ******** GRASS ********
+		Leave this commented out if using Google Chrome
+
+		var grassLoader = new THREE.TextureLoader();
+		var grassTexture = grassLoader.load( "textures/grass.jpg");
+
+		/* NOTE: When repeating textures it is of the utmost importance to set
+		the texture's wrapS and wrapT properties to the number of repetitions. */
+		/*grassTexture.repeat.set(50, 50);
+		grassTexture.wrapS = grassTexture.wrapT = 50;
+		var planeMaterial = new THREE.MeshBasicMaterial({map: grassTexture} );
+
+		   *********************** */
+
+		var planeMaterial = new THREE.MeshNormalMaterial();
+		plane = new THREE.Mesh(planeGeometry, planeMaterial);
+
+		/* Fix the plane's orientation, do not forget to set it to double sided
+		if you wish to see it from both directions. */
+		plane.rotation.x = Math.PI / 2;
+		plane.position.y = -2.5;
+		plane.material.side = THREE.DoubleSide;
+		scene.add(plane);
+
+	}
 	// Put all animations in here instead of in render().
 	function animate() {
 
 		requestAnimationFrame(animate);
 
 		// ************** ANIMATIONS **************
-
+		box.rotation.y += 0.01;
+		box.position.y += 0.01;
 		controls.update()
-
 
 		// ************** ANIMATIONS **************
 		render();
