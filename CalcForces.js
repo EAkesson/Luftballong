@@ -30,8 +30,15 @@ function CalcForces() {
 }
 
 function CalcNewTemp() {
-	//button pressed
-	balloonTemp = balloonTemp + (propaneEnergy/(airDensity*balloonVolume*specificHeatCapacity_Air));
+	balloonTemp = balloonTemp + (propaneEnergy*(1/fps)/(airDensity*balloonVolume*specificHeatCapacity_Air));  //En gasbrännare 3-4MW
+
+	if(parachuteVentOpen){
+		var airFlow =  parachuteVentDC*parachuteVentArea*Math.sqrt(2*gravitationalAcc*balloonRadius*2*(balloonTemp-airTemp)/balloonTemp);
+		balloonTemp = (balloonTemp*(balloonVolume-airFlow*(1/fps)) + airTemp*airFlow*(1/fps))/balloonVolume;
+	}
+
+	console.log(balloonSpeed.y + " : " + balloonTemp);
+	timeSinceLastRender.getElapsedTime();
+
 	//TODO ha med minskande temperatur iom omgivning
-	//TODO bry sig om knapptryck
 }
