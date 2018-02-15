@@ -1,0 +1,84 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scaleable=no, minimum-scale=1.0, maximum-scale=1.0" />
+	<title>OrbitControls</title>
+</head>
+
+<body>
+
+<!-- Include sources here -->
+<script src="js/three.js"></script>
+<script src="js/controls/OrbitControls.js"></script>
+
+<script> // ************** JavaScript **************
+
+	// Scene variables
+	var aspect, camera, scene, renderer, controls;
+
+	init();
+	animate();
+
+	function init() {
+
+		// Initiate camera
+		aspect = window.innerWidth / window.innerHeight;
+		camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
+		camera.position.z = 25;
+
+		// Create scene
+		scene = new THREE.Scene();
+
+		// Create renderer
+		renderer = new THREE.WebGLRenderer({ antialias: true });
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		// Implement OrbitControls
+		controls = new THREE.OrbitControls(camera, renderer.domElement);
+		controls.addEventListener('change', render);
+		controls.autoRotate = true;
+		controls.autoRotateSpeed = 2.0;
+		controls.enableZoom = true;
+
+
+		// Create a test box and add it to scene
+		var geometry = new THREE.BoxGeometry(5, 5, 5);
+		var material = new THREE.MeshNormalMaterial();
+		var box = new THREE.Mesh( geometry, material );
+		scene.add( box );
+	}
+
+	// Put all animations in here instead of in render().
+	function animate() {
+
+		requestAnimationFrame(animate);
+
+		// ************** ANIMATIONS **************
+
+		controls.update()
+
+
+		// ************** ANIMATIONS **************
+		render();
+
+	}
+
+	// KEEP THIS CLEAN.
+	function render() {
+		renderer.render(scene, camera);
+	}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
