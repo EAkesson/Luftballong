@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Luftballong</title>
+        <style>
+            html, body { margin: 0; padding: 0; overflow: hidden; }
+        </style>
+    </head>
+
+    <body>
+
+		<!-- Include sources here -->
+        <script src="js/three.js"></script>
+		<script src ="js/loaders/OBJLoader.js"></script>
+		<script src="js/controls/OrbitControls.js"></script>
+
+        <script> // ************** JavaScript **************
+
+		// Scene variables
+		var aspect, camera, scene, renderer, controls;
+
+		initScene();
+		loadWorld();
+		animate();
+
+		// Builds camera, camera controls, scene and renderer
+		function initScene() {
+
+			// Initiate camera
+			aspect = window.innerWidth / window.innerHeight;
+			camera = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 );
+			camera.position.z = 5;
+
+			// Create scene
+			scene = new THREE.Scene();
+
+			// Create renderer
+			renderer = new THREE.WebGLRenderer({antialias: true});
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			// Implement OrbitControls
+			controls = new THREE.OrbitControls(camera, renderer.domElement);
+			controls.addEventListener('change', render);
+			controls.autoRotate = true;
+			controls.autoRotateSpeed = 2.0;
+			controls.enableZoom = true;
+		}
+
+		function loadWorld() {
+
+			// Create a test sphere and add it to the scene
+			var geometry_sphere = new THREE.SphereGeometry(1, 32, 32 );
+			var material = new THREE.MeshNormalMaterial();
+			var sphere = new THREE.Mesh( geometry_sphere, material );
+			scene.add( sphere );
+
+		}
+
+		// Put all animations in here instead of in render().
+		function animate() {
+
+			requestAnimationFrame(animate);
+
+			// ************** ANIMATIONS **************
+
+			controls.update()
+
+
+			// ************** ANIMATIONS **************
+			render();
+		}
+
+		// KEEP THIS CLEAN.
+		function render() {
+			renderer.render(scene, camera);
+		}
+
+            // Load balloon
+/*            var loader = new THREE.OBJLoader();
+            loader.load("balloon/Air_Balloon.obj", function( group ) {
+				obj = group.children[0];
+				obj.material = new THREE.MeshPhongMaterial();
+				obj.color = new THREE.Color(0x00ff00);
+				scene.add( obj );
+            });*/
+
+
+        </script>
+    </body>
+</html>
