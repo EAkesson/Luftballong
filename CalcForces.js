@@ -3,17 +3,18 @@ var forceZ;
 var forceX;
 var forceY;
 
-function Calcforces() {
+function CalcForces() {
 
 	CalcNewTemp(); //Update the balloontemperature
 
 	//Y FORCES
 	var forceLift = ((1/airTemp-1/balloonTemp)*atmosphericPressure/ideelGasConst*balloonVolume)*gravitationalAcc;
-	var forceUp = forceLift;
+	var forceWindY = airResistanceforSphere*airDensity*(windSpeed.y*Math.abs(windSpeed.y))*balloonCrossArea*0.5;
+	var forceUp = forceLift + forceWindY;
 
 	var forceGravity = balloonWeight*gravitationalAcc;
 	var forceDragY = airResistanceforSphere*airDensity*(balloonSpeed.y*Math.abs(balloonSpeed.y))*balloonCrossArea*0.5;
-	//var forceWindY = airResistanceforSphere*airDensity*(windSpeed.y*Math.abs(windSpeed.y))*balloonCrossArea*0.5;
+
 	var forceDown = forceGravity + forceDragY;
 	forceY = forceUp - forceDown;
 
@@ -32,4 +33,5 @@ function CalcNewTemp() {
 	//button pressed
 	balloonTemp = balloonTemp + (propaneEnergy/(airDensity*balloonVolume*specificHeatCapacity_Air));
 	//TODO ha med minskande temperatur iom omgivning
+	//TODO bry sig om knapptryck
 }
