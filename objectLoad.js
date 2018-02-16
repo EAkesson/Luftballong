@@ -3,6 +3,7 @@ var obj;
 function objectLoad( filePaths, posArray) {
 
 	var loader = new THREE.OBJLoader(); //Creates loader
+	console.log("hej");
 
 	for(var i = 0; i < filePaths.length; i++) {
 		createObj(loader, filePaths[i], posArray[i]);
@@ -17,6 +18,7 @@ function createObj(loader, file, pos){
 		obj.position.x = pos.x;
 		obj.position.y = pos.y;
 		obj.position.z = pos.z;
+		obj.name = "objObject";
 		scene.add(obj);
 	})
 }
