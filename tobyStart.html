@@ -32,8 +32,9 @@
 				scene.add( obj );
             });*/
 
-           	var objToLoad = ['balloon/Air_Balloon.obj']; //String array to add filepath to the obj file that we want to load
-            objectLoad(objToLoad);
+           	var objToLoad = ['balloon/Air_Balloon.obj', 'balloon/Air_Balloon.obj']; //String array to add filepath to the obj file that we want to load
+			var objPos = [new THREE.Vector3(1,0,0), new THREE.Vector3(-1,0,0)];
+			objectLoad(objToLoad, objPos);
 
             // Create sphere and add it to scene
             var geometry_sphere = new THREE.SphereGeometry(1, 32, 32 );
