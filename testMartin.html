@@ -12,22 +12,26 @@
 <!-- Include sources here -->
 <script src="js/three.js"></script>
 <script src="js/controls/OrbitControls.js"></script>
+<script src="EEkEy.js"></script>
 
 <script> // ************** JavaScript **************
 
 	// Scene variables
 	var aspect, camera, scene, renderer, controls;
-
+	var  relativeCamPos = 0;
 	init();
 	loadWorld()
 	animate();
 
 	function init() {
 
+		// Add scroll listener
+		document.addEventListener( 'wheel', onMouseWheel);
+
 		// Initiate camera
 		aspect = window.innerWidth / window.innerHeight;
 		camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
-		camera.position.z = 25;
+		camera.position.z = 50;
 
 		// Create scene
 		scene = new THREE.Scene();
@@ -40,15 +44,8 @@
 		// Implement OrbitControls
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		controls.addEventListener('change', render);
-		controls.autoRotate = false;
-		controls.autoRotateSpeed = 2.0;
-		controls.enableZoom = true;
-
-		// Audio Source
-		var audioSource = new Audio("audio/blipblop.ogg");
-		audioSource.loop = true;
-		audioSource.play();
-
+		controls.enableZoom = false;
+		controls.enablePan = false;
 
 	}
 
@@ -65,12 +62,12 @@
 		var skyGeometry = new THREE.SphereGeometry(500, 50, 50);
 
 		/* ******** SKY ********
-		Leave this commented out if using Google Chrome
+		Leave this commented out if using Google Chrome */
 		var skyTexture = new THREE.TextureLoader().load( "textures/sky.jpg" );
 		var skyMaterial =  new THREE.MeshBasicMaterial( {map: skyTexture} );
-		   ********************** */
+		/*   ********************** */
 
-		var skyMaterial = new THREE.MeshBasicMaterial({color: 0xd3d3d3});
+		//var skyMaterial = new THREE.MeshBasicMaterial({color: 0xd3d3d3});
 
 		sky = new THREE.Mesh(skyGeometry, skyMaterial);
 		sky.material.side = THREE.BackSide;
@@ -86,20 +83,20 @@
 		var planeGeometry =  new THREE.PlaneGeometry(500, 500, 100, 100);
 
 		/* ******** GRASS ********
-		Leave this commented out if using Google Chrome
+		Leave this commented out if using Google Chrome */
 
 		var grassLoader = new THREE.TextureLoader();
 		var grassTexture = grassLoader.load( "textures/grass.jpg");
 
 		/* NOTE: When repeating textures it is of the utmost importance to set
 		the texture's wrapS and wrapT properties to the number of repetitions. */
-		/*grassTexture.repeat.set(50, 50);
+		grassTexture.repeat.set(50, 50);
 		grassTexture.wrapS = grassTexture.wrapT = 50;
 		var planeMaterial = new THREE.MeshBasicMaterial({map: grassTexture} );
 
-		   *********************** */
+		 /*  *********************** */
 
-		var planeMaterial = new THREE.MeshNormalMaterial();
+		//var planeMaterial = new THREE.MeshNormalMaterial();
 		plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
 		/* Fix the plane's orientation, do not forget to set it to double sided
@@ -118,6 +115,9 @@
 		// ************** ANIMATIONS **************
 		box.rotation.y += 0.01;
 		box.position.y += 0.01;
+		camera.position.y = box.position.y + relativeCamPos;
+
+		controls.target.set(box.position.x, box.position.y, box.position.z);
 		controls.update()
 
 		// ************** ANIMATIONS **************
