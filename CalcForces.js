@@ -30,6 +30,7 @@ function CalcForces() {
 }
 
 function CalcNewTemp() {
+
 	balloonTemp = balloonTemp + (propaneEnergy*(1/fps)/(airDensity*balloonVolume*specificHeatCapacity_Air));  //En gasbrännare 3-4MW
 
 	if(parachuteVentOpen){
@@ -37,8 +38,20 @@ function CalcNewTemp() {
 		balloonTemp = (balloonTemp*(balloonVolume-airFlow*(1/fps)) + airTemp*airFlow*(1/fps))/balloonVolume;
 	}
 
+	if(balloonTemp > airTemp){
+		TempLoss();
+	}
+
 	console.log(balloonSpeed.y + " : " + balloonTemp);
 	timeSinceLastRender.getElapsedTime();
 
 	//TODO ha med minskande temperatur iom omgivning
+}
+
+function TempLoss() {
+
+	var energyTransfer = (nylonthermalcond*balloonArea/balloonNylonThickness*(balloonTemp-airTemp))*steplength; // Joule
+	var ballonEnergy = balloonVolume*airDensity*specificHeatCapacity_Air*balloonTemp - energyTransfer;
+	balloonTemp = ballonEnergy / (balloonVolume*airDensity*specificHeatCapacity_Air);
+
 }
