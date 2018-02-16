@@ -5,6 +5,12 @@ function onDocumentKeyDown(event) {
 		propaneEnergy = 3*Math.pow(10,6)//46.357*Math.pow(10,6);
 	}else if(keyCode == 17){
 		parachuteVentOpen = true;
+	}else if (keyCode === 86) { //v
+		if (cameraPick === 1){
+			cameraPick = 2;
+		} else if (cameraPick === 2) {
+			cameraPick = 1;
+		}
 	}
 };
 
@@ -18,6 +24,19 @@ function onDocumentKeyUp(event) {
 	}
 
 };
+
+function onMouseMove(event) {
+	if (this.enabled == false) return;
+
+	var movementX = event.movementX = 0;
+	var movementY = event.movementY = 0;
+
+	yawObject.rotation.y -= movementX * 0.002;
+	pitchObject.rotation.x -= movementY * 0.002;
+
+	pitchObject.rotation.x = Math.max(-Math.PI / 2, Math.min( Math.PI / 2, pitchObject.rotation.x));
+};
+
 
 function onMouseWheel(event) {
 	var scrollDirection = detectMouseWheelDirection(event);
@@ -58,3 +77,4 @@ function detectMouseWheelDirection(event) {
 
 	return direction;
 }
+

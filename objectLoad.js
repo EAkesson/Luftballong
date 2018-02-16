@@ -3,7 +3,6 @@ var obj;
 function objectLoad( filePaths, posArray) {
 
 	var loader = new THREE.OBJLoader(); //Creates loader
-	console.log("hej");
 
 	for(var i = 0; i < filePaths.length; i++) {
 		createObj(loader, filePaths[i], posArray[i]);
