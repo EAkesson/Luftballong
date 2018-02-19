@@ -13,6 +13,7 @@
 		<script src="CalcForces.js"></script>
 		<script src="Parameters.js"></script>
 		<script src="EEkEy.js"></script>
+		<script src="WindField.js"></script>
         <script>
             // Javascript will go here.
             // Create scene, camera, renderer
@@ -42,6 +43,8 @@
             var balloon = new THREE.Mesh( geometry_sphere, material );
             scene.add( balloon );
 
+			CreateWindField();
+
             // WASD
             document.addEventListener("keydown", onDocumentKeyDown, false);
 			document.addEventListener("keyup", onDocumentKeyUp, false);
@@ -54,7 +57,7 @@
 
 					CalcForces();
 					CalcPosition();
-
+					//RenderWind();
 				}, 1000 / fps );
 
             	renderer.render( scene, camera );
