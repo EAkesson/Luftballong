@@ -17,8 +17,7 @@ function createObj(loader, file, pos){
 		obj.position.x = pos.x;
 		obj.position.y = pos.y;
 		obj.position.z = pos.z;
-		var temp = file.toString().split('.');
-		obj.name = temp[0].split("/").reverse()[0];
+		obj.name = file.toString().split('.')[0].split("/").reverse()[0];
 		scene.add(obj);
 	})
 }
