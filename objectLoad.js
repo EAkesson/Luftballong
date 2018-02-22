@@ -1,23 +1,44 @@
 var obj;
 
-function objectLoad( filePaths, posArray) {
+var onProgress = function ( xhr ) {
+	if ( xhr.lengthComputable ) {
+		var percentComplete = xhr.loaded / xhr.total * 100;
+		console.log( Math.round(percentComplete, 2) + '% downloaded' );
+	}
+};
 
-	var loader = new THREE.OBJLoader(); //Creates loader
+var onError = function ( xhr ) { };
 
-	for(var i = 0; i < filePaths.length; i++) {
-		createObj(loader, filePaths[i], posArray[i]);
+function objectLoad( objPaths, mtlPath, posArray) {
+
+	THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader()); // Not really sure what this is doing
+
+	var objLoader = new THREE.OBJLoader(); //Creates loader
+	var mtlLoader = new THREE.MTLLoader();
+
+	for (var i = 0; i < objPaths.length; i++) {
+		createObj(objLoader, mtlLoader, objPaths[i], mtlPath[i], posArray[i]);
 	}
 }
 
-function createObj(loader, file, pos){
-	loader.load(file, function (group) {
-		obj = group.children[0];
-		obj.material = new THREE.MeshPhongMaterial();
-		obj.color = new THREE.Color(0, 255, 0);
-		obj.position.x = pos.x;
-		obj.position.y = pos.y;
-		obj.position.z = pos.z;
-		obj.name = file.toString().split('.')[0].split("/").reverse()[0];
-		scene.add(obj);
-	})
+function createObj(objLoader, mtlLoader, object, mtl,  pos){
+
+	mtlLoader.setMaterialOptions({ side: THREE.DoubleSide});
+	mtlLoader.load(mtl, function (materials) {
+
+		materials.preload();
+		loadObj(objLoader, object, pos, materials);
+	}, onProgress , onError)
+}
+
+function loadObj(objLoader, object, pos, materials){
+
+	objLoader.setMaterials( materials );
+	objLoader.load(object, function(group) {
+		group.position.x = pos.x;
+		group.position.y = pos.y;
+		group.position.z = pos.z;
+		group.name = object.toString().split('.')[0].split("/").reverse()[0];
+		scene.add(group);
+	}, onProgress , onError)
 }

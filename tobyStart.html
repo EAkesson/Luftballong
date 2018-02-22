@@ -10,6 +10,8 @@
     <body>
         <script src="js/three.js"></script>
 		<script src ="js/loaders/OBJLoader.js"></script>
+		<script src ="js/loaders/MTLLoader.js"></script>
+		<script src ="js/loaders/DDSLoader.js"></script>
 		<script src ="objectLoad.js"></script>
         <script>
             // Javascript will go here.
@@ -21,7 +23,7 @@
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
             // Set camera position
-            camera.position.z = 5;
+            camera.position.z = 50;
             // Create ground plane
             // Load balloon
            /* var loader = new THREE.OBJLoader();
@@ -32,9 +34,16 @@
 				scene.add( obj );
             });*/
 
-           	var objToLoad = ['balloon/Air_Balloon.obj', 'balloon/Air_Balloon.obj']; //String array to add filepath to the obj file that we want to load
-			var objPos = [new THREE.Vector3(1,0,0), new THREE.Vector3(-1,0,0)];
-			objectLoad(objToLoad, objPos);
+			var ambient = new THREE.AmbientLight('#fff'); // Important to be able to see any object loaded my objectLoad()
+			scene.add(ambient);
+
+			/*Important to place files in corresponding elements in arrays ex. one object
+			is objToLoad[0], mltToLoad[0], objPos[0]*/
+           	var objToLoad = ['balloon/Air_Balloon/Air_Balloon.obj']; // String array to add filepath to the obj file that we want to load
+			var mtlToLoad = ['balloon/Air_Balloon/Air_Balloon.mtl']; // String array to add filepath to the mtl file that we want to load
+			var objPos = [new THREE.Vector3(1,0,0)];
+
+			objectLoad(objToLoad, mtlToLoad, objPos); //Loaded object can be found using filename in childrens of scene
 
             // Create sphere and add it to scene
             var geometry_sphere = new THREE.SphereGeometry(1, 32, 32 );
