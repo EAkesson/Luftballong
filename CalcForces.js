@@ -9,7 +9,7 @@ function CalcForces() {
 
 	//Y FORCES
 	var forceLift = ((1/airTemp-1/balloonTemp)*atmosphericPressure/ideelGasConst*balloonVolume)*gravitationalAcc;
-	var forceWindY = airResistanceforSphere*airDensity*(windSpeed.y*Math.abs(windSpeed.y))*balloonCrossArea*0.5;
+	var forceWindY = airResistanceforSphere*airDensity*(windVelocity.y*Math.abs(windVelocity.y))*balloonCrossArea*0.5;
 	var forceUp = forceLift + forceWindY;
 
 	var forceGravity = balloonWeight*gravitationalAcc;
@@ -20,12 +20,12 @@ function CalcForces() {
 
 	//X FORCES
 	var forceDragX = airResistanceforSphere*airDensity*(balloonSpeed.x*Math.abs(balloonSpeed.x))*balloonCrossArea*0.5;
-	var forceWindX = airResistanceforSphere*airDensity*(windSpeed.x*Math.abs(windSpeed.x))*balloonCrossArea*0.5;
+	var forceWindX = airResistanceforSphere*airDensity*(windVelocity.x*Math.abs(windVelocity.x))*balloonCrossArea*0.5;
 	forceX = forceWindX - forceDragX;
 
 	//Z FORCES
 	var forceDragZ = airResistanceforSphere*airDensity*(balloonSpeed.z*Math.abs(balloonSpeed.z))*balloonCrossArea*0.5;
-	var forceWindZ = airResistanceforSphere*airDensity*(windSpeed.z*Math.abs(windSpeed.z))*balloonCrossArea*0.5;
+	var forceWindZ = airResistanceforSphere*airDensity*(windVelocity.z*Math.abs(windVelocity.z))*balloonCrossArea*0.5;
 	forceZ = forceWindZ - forceDragZ;
 }
 

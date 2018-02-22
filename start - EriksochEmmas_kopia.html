@@ -27,29 +27,22 @@
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
             // Set camera position
-            camera.position.z = 5;
-            // Create ground plane
-            // Load balloon
-            var loader = new THREE.ObjectLoader();
-            	loader.load(".json", function( group ) {
-            	mesh = group.children[0];
-            	mesh.material = new THREE.MeshPhongMaterial();
-            	scene.add( mesh );
-            });
+            camera.position.z = 100;
+			camera.position.y = 10;
 
             // Create sphere and add it to scene
-            var geometry_sphere = new THREE.SphereGeometry(1, 32, 32 );
+            var geometry_sphere = new THREE.SphereGeometry(5, 32, 32 );
             var material = new THREE.MeshNormalMaterial();
             var balloon = new THREE.Mesh( geometry_sphere, material );
             scene.add( balloon );
-
-			CreateWindField();
+			scene.add( arrowHelper );
 
             // WASD
             document.addEventListener("keydown", onDocumentKeyDown, false);
 			document.addEventListener("keyup", onDocumentKeyUp, false);
 			//document.addEventListener("keypress", onDocumentKeyPress, false);
             // Render function
+
             var render = function () {
 				setTimeout( function() {
 
@@ -57,7 +50,7 @@
 
 					CalcForces();
 					CalcPosition();
-					//RenderWind();
+					getWindinPoint();
 				}, 1000 / fps );
 
             	renderer.render( scene, camera );

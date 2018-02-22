@@ -2,7 +2,7 @@
 var windDir = new THREE.Vector3(0, 0, 0);
 var windSpeed = new THREE.Vector3(0, 0, 0);
 var wspeedArray = new Array();
-var maxWind = 1;
+var maxWind = 5;
 var normWindSpeed;
 
 // Create arrow to visualize wind
@@ -14,6 +14,7 @@ var arrowHelper = new THREE.ArrowHelper( windDir, arrowPos, arrowLength, arrowHe
 
 function getWindinPoint(){
 
+	// Set normalized wind direction for current position
 	windDir.x = Math.sin(Math.pow(Math.sin(balloon.position.x/100),1) + balloon.position.z/50);
 	windDir.y = 1+1;
 	windDir.z = Math.cos(balloon.position.x/50 + Math.pow(balloon.position.z/100, 1));
@@ -22,11 +23,10 @@ function getWindinPoint(){
 	updateWindSpeed1();
 
 	// Set wind velocity for current position
-	windVelocity.x = windSpeed.x;
-	windVelocity.y = windSpeed.y;
-	windVelocity.z = windSpeed.z;
+	windVelocity.x = windDir.x*windSpeed.x;
+	windVelocity.y = windDir.y*windSpeed.y;
+	windVelocity.z = windDir.z*windSpeed.z;
 
-	console.log(windVelocity);
 	// Render wind arrow
 	RenderWind();
 }
@@ -39,7 +39,7 @@ function updateWindSpeed1(){
 	}
 
 	// Add wind to first slot
-	wspeedArray.unshift(remap(windDir, 0, 1, -maxWind, maxWind));
+	wspeedArray.unshift(remap(windDir, 0, 1, 0, maxWind));
 
 	windSpeed.x = 0;
 	windSpeed.y = 0;
@@ -95,5 +95,5 @@ function remap(val, lRange1, hRange1, lRange2, hRange2){
 }
 
 function RenderWind() {
-	arrowHelper.setDirection(windSpeed.normalize());
+	arrowHelper.setDirection(windDir);
 }

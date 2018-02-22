@@ -21,7 +21,7 @@
 	var nylonthermalcond = 0.25;
 
 	var gravitationalAcc = 9.82; // m/s^2
-	var windSpeed = new THREE.Vector3( rand()*sin(xyz-3)^2, 0, 0); // m/s
+	var windVelocity = new THREE.Vector3( 0, 0, 0); // m/s
 
 	var specificHeatCapacity_Air = 720; // At constant volume
 	var propaneEnergy = 0; //Amount of watt for burner
