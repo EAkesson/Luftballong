@@ -8,7 +8,7 @@
 	var airResistanceforSphere = 0.47;
 	var airDensity = 1.2; // For 20c air
 
-	var balloonTemp = 370;  // Kelvin
+	var balloonTemp = 380;  // Kelvin
 	var balloonVolume = 2800; // m^3
 	var balloonWeight = 724; // kg
 	var balloonRadius = (Math.pow((balloonVolume*3/(4*Math.PI)), 1/3 ));
