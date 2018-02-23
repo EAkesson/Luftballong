@@ -1,16 +1,24 @@
 function onDocumentKeyDown(event) {
 	var keyCode = event.which;
 	// up
-	if (keyCode == 32) {
-		propaneEnergy = 3*Math.pow(10,6)//46.357*Math.pow(10,6);
-	}else if(keyCode == 17){
-		parachuteVentOpen = true;
-	}else if (keyCode === 86) { //v
-		if (cameraPick === 1){
+	switch (event.keyCode) {
+		case 86: //v
 			cameraPick = 2;
-		} else if (cameraPick === 2) {
+			console.log(cameraPick);
+			document.body.requestPointerLock();
+			break;
+		case 67: //c
 			cameraPick = 1;
-		}
+			console.log(cameraPick);
+			document.exitPointerLock();
+			break;
+		case 32:
+			propaneEnergy = 3*Math.pow(10,6)//46.357*Math.pow(10,6);
+			console.log("hej");
+			break;
+		case 17:
+			parachuteVentOpen = true;
+			break;
 	}
 };
 

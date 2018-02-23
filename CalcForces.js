@@ -41,9 +41,8 @@ function CalcNewTemp() {
 	if(balloonTemp > airTemp){
 		TempLoss();
 	}
-	timeSinceLastRender.getElapsedTime();
 
-	//TODO ha med minskande temperatur iom omgivning
+
 }
 
 function TempLoss() {
