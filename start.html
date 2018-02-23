@@ -113,9 +113,9 @@
 			var mtlToLoad = ['balloon/Air_Balloon/Air_Balloon.mtl']; //// String array to add filepath to the mtl file that we want to load
 			var objPos = [new THREE.Vector3(0,0,0)];
 			objectLoad(objToLoad, mtlToLoad, objPos); //Loaded object can be found using filename in childrens of scene
-			console.log(scene.getObjectByName("Air_Balloon"));
+
 			setTimeout( function() {
-				//balloon = scene.getObjectByName("Air_Balloon");
+				balloon = scene.getObjectByName("Air_Balloon");
 			}, 1000);
 
 			var planeGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);

@@ -14,7 +14,6 @@ function onDocumentKeyDown(event) {
 			break;
 		case 32:
 			propaneEnergy = 3*Math.pow(10,6)//46.357*Math.pow(10,6);
-			console.log("hej");
 			break;
 		case 17:
 			parachuteVentOpen = true;
