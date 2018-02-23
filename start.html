@@ -82,6 +82,7 @@
 			orbitControls = new THREE.OrbitControls(orbit, renderer.domElement);
 			orbitControls.addEventListener('change', render);
 			orbitControls.enableZoom = false;
+			orbitControls.enablePan = false;
 
 			// PointerLockControls
 			controls = new THREE.PointerLockControls(camera);
