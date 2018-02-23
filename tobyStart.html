@@ -52,36 +52,36 @@
             scene.add( sphere );
             console.log(scene);
             scene.background = new THREE.Color(0xff0000);
+
             // WASD
             document.addEventListener("keydown", onDocumentKeyDown, false);
             function onDocumentKeyDown(event) {
-            var keyCode = event.which;
-            // up
-            if (keyCode == 87) {
-            sphere.position.y += 1;
-            // down
-            } else if (keyCode == 83) {
-            sphere.position.y -= 1;
-            // left
-            } else if (keyCode == 65) {
-            sphere.position.x -= 1;
-            // right
-            } else if (keyCode == 68) {
-            sphere.position.x += 1;
-            // space
-            } else if (keyCode == 32) {
-            sphere.position.x = 0.0;
-            sphere.position.y = 0.0;
-            }
-            render();
+				var keyCode = event.which;
+				// up
+				if (keyCode == 87) {
+					sphere.position.y += 1;
+				// down
+				} else if (keyCode == 83) {
+					sphere.position.y -= 1;
+				// left
+				} else if (keyCode == 65) {
+					sphere.position.x -= 1;
+				// right
+				} else if (keyCode == 68) {
+					sphere.position.x += 1;
+				// space
+				} else if (keyCode == 32) {
+					sphere.position.x = 0.0;
+					sphere.position.y = 0.0;
+				}
+				render();
             };
+
             // Render function
             var render = function () {
-            requestAnimationFrame( render );
-            // add cool animation like:
-            //sphere.rotation.x += 0.1;
-            //sphere.rotation.y += 0.1;
-            renderer.render( scene, camera );
+				requestAnimationFrame( render );
+				// add cool animation like:
+				renderer.render( scene, camera );
             };
             render();
         </script>
