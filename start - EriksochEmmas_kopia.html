@@ -15,7 +15,7 @@
 		<script src="EEkEy.js"></script>
 		<script src="WindField.js"></script>
         <script>
-            // Javascript will go here.
+
             // Create scene, camera, renderer
             var scene = new THREE.Scene();
             var aspect = window.innerWidth / window.innerHeight; // (what is this?)
@@ -26,7 +26,8 @@
 
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
-            // Set camera position
+
+			// Set camera position
             camera.position.z = 100;
 			camera.position.y = 10;
 
@@ -40,9 +41,8 @@
             // WASD
             document.addEventListener("keydown", onDocumentKeyDown, false);
 			document.addEventListener("keyup", onDocumentKeyUp, false);
-			//document.addEventListener("keypress", onDocumentKeyPress, false);
-            // Render function
 
+			// Render function
             var render = function () {
 				setTimeout( function() {
 
@@ -50,7 +50,7 @@
 
 					CalcForces();
 					CalcPosition();
-					getWindinPoint();
+					WindUpdate();
 				}, 1000 / fps );
 
             	renderer.render( scene, camera );

@@ -25,18 +25,6 @@ function onDocumentKeyUp(event) {
 
 };
 
-function onMouseMove(event) {
-	if (this.enabled == false) return;
-
-	var movementX = event.movementX = 0;
-	var movementY = event.movementY = 0;
-
-	yawObject.rotation.y -= movementX * 0.002;
-	pitchObject.rotation.x -= movementY * 0.002;
-
-	pitchObject.rotation.x = Math.max(-Math.PI / 2, Math.min( Math.PI / 2, pitchObject.rotation.x));
-};
-
 
 function onMouseWheel(event) {
 	var scrollDirection = detectMouseWheelDirection(event);
@@ -46,14 +34,14 @@ function onMouseWheel(event) {
 function handleMouseWheelDirection(direction){
 	if (direction == 'down') {
 		// To avoid wonky camera angles we limit the minimal value to 1.
-		if (relativeCamPos == 1) {
-			relativeCamPos = relativeCamPos;
+		if (relativeOrbitPosition == 1) {
+			relativeOrbitPosition = relativeOrbitPosition;
 		}
 		else {
-			relativeCamPos --;
+			relativeOrbitPosition --;
 		}
 	} else if (direction == 'up') {
-		relativeCamPos ++;
+		relativeOrbitPosition ++;
 	} else {
 		console.log("The scroll direction could not be detected");
 	}
