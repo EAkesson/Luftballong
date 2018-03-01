@@ -24,6 +24,8 @@
 <!--CAMERA-->
 <script src="js/controls/OrbitControls.js"></script>
 <script src="js/controls/PointerLockControls.js"></script>
+<!--WORLD-->
+<script src="loadWorld.js"></script>
 <!--KEY-->
 <script src="EEkEy.js"></script>
 
@@ -54,7 +56,7 @@ var pointerlockerror = function (event) {
 }
 var controlsEnabled = false;
 
-var balloon, plane;
+var balloon, earth;
 
 initScene();
 loadWorld();
@@ -67,7 +69,7 @@ function initScene() {
 
 	// Camera 1
 	orbit = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-	orbit.position.z = 10;
+	orbit.position.z = 100;
 
 	// Camera 2
 	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
@@ -87,7 +89,7 @@ function initScene() {
 	orbitControls.addEventListener('change', render);
 	orbitControls.enableZoom = false;
 	orbitControls.enablePan = false;
-	orbitControls.autoRotate = true;
+	//orbitControls.autoRotate = true;
 
 	// PointerLockControls
 	controls = new THREE.PointerLockControls(camera);
@@ -99,24 +101,7 @@ function initScene() {
 	document.addEventListener( 'wheel', onMouseWheel);
 }
 
-function loadWorld() {
 
-	// Sphere
-	var geometry = new THREE.SphereGeometry( 5, 32, 32 );
-	var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-	balloon = new THREE.Mesh( geometry, material );
-	scene.add( balloon );
-
-	var planeGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
-	var planeMaterial = new THREE.MeshNormalMaterial();
-	plane = new THREE.Mesh(planeGeometry, planeMaterial);
-	plane.rotation.x = Math.PI / 2;
-	plane.position.y = -2.5;
-	plane.material.side = THREE.DoubleSide;
-	scene.add(plane);
-
-	scene.add( arrowHelper ); //TODO SET THIS IN THA HOOD
-}
 
 function onWindowResize() {
 	camera.ascpet = orbit.ascpet = window.innerWidth / window.innerHeight;
@@ -148,6 +133,9 @@ function animate() {
 		camera.position.z = balloon.position.z;
 
 		orbitControls.update();
+
+
+
 
 		console.log(balloonTemp)
 		// ************** ANIMATIONS **************
