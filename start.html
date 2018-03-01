@@ -71,8 +71,8 @@
 			document.addEventListener('pointerlockerror', pointerlockerror, false);
 
 			// Camera 1
-			orbit = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-			orbit.position.z = 10;
+			orbit = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+			orbit.position.z = 50;
 
 			// Camera 2
 			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
@@ -107,25 +107,29 @@
 		function loadWorld() {
 
 			// Sphere
-			/*var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+			/*var geometry = new THREE.SphereGeometry( 8, 32, 32 );
 			var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-			balloon = new THREE.Mesh( geometry, material );
-			scene.add( balloon );*/
+			tetttt = new THREE.Mesh( geometry, material );
+			scene.add( tetttt );
+			tetttt.position.y = 8;*/
 
-			var objToLoad = ['balloon/Air_Balloon/Air_Balloon.obj']; // String array to add filepath to the obj file that we want to load
-			var mtlToLoad = ['balloon/Air_Balloon/Air_Balloon.mtl']; //// String array to add filepath to the mtl file that we want to load
+
+			//var objToLoad = ['balloon/Air_Balloon/realSizeBalloon1.obj']; // String array to add filepath to the obj file that we want to load
+			var objToLoad = ['EnviModels/restart/Tree4.obj']; // String array to add filepath to the obj file that we want to load
+			//var mtlToLoad = ['balloon/Air_Balloon/realSizeBalloon1.mtl']; //// String array to add filepath to the mtl file that we want to load
+			var mtlToLoad = ['EnviModels/restart/Tree4.mtl']; //// String array to add filepath to the mtl file that we want to load
 			var objPos = [new THREE.Vector3(0,0,0)];
 			objectLoad(objToLoad, mtlToLoad, objPos); //Loaded object can be found using filename in childrens of scene
 
 			setTimeout( function() {
-				balloon = scene.getObjectByName("Air_Balloon");
+				balloon = scene.getObjectByName("realSizeBalloon1");
 			}, 1000);
 
 			var planeGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
 			var planeMaterial = new THREE.MeshNormalMaterial();
 			plane = new THREE.Mesh(planeGeometry, planeMaterial);
 			plane.rotation.x = Math.PI / 2;
-			plane.position.y = -2.5;
+			plane.position.y = 0;
 			plane.material.side = THREE.DoubleSide;
 			scene.add(plane);
 
