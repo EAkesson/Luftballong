@@ -9,6 +9,10 @@
 
     <body>
 
+		<div>
+			<p>This is a sad attempt of a HUD</p>
+		</div>
+
 		<!-- Include sources here -->
 		<!--THREE.JS -->
         <script src="js/three.js"></script>
@@ -88,13 +92,12 @@
 			orbitControls.addEventListener('change', render);
 			orbitControls.enableZoom = false;
 			orbitControls.enablePan = false;
+			orbitControls.autoRotate = true;
 
 			// PointerLockControls
 			controls = new THREE.PointerLockControls(camera);
 			scene.add(controls.getObject());
-
-
-
+			
 			document.addEventListener('keydown', onDocumentKeyDown, false);
 			document.addEventListener("keyup", onDocumentKeyUp, false);
 			window.addEventListener('resize', onWindowResize, false);
