@@ -1,169 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Orbit</title>
+	<title>Luftballong</title>
 	<style>
-		html, body {
-			width: 100%;
-			height: 100%;
-		}
-
-		body {
-			margin: 0;
-			overflow: hidden;
-		}
-
+		html, body { margin: 0; padding: 0; overflow: hidden; }
 	</style>
 </head>
+
 <body>
 
-</body>
+<div>
+	<p>This is a sad attempt of a HUD</p>
+</div>
+
+<!-- Include sources here -->
+<!--THREE.JS -->
 <script src="js/three.js"></script>
+<!--Physics-->
+<script src="CalcPosition.js"></script>
+<script src="CalcForces.js"></script>
+<script src="Parameters.js"></script>
+<script src="WindField.js"></script>
+<!--CAMERA-->
 <script src="js/controls/OrbitControls.js"></script>
 <script src="js/controls/PointerLockControls.js"></script>
+<!--KEY-->
 <script src="EEkEy.js"></script>
-<script>
 
-	// Scene variables
-	var camera, controls, orbit, orbitControls, scene, renderer;
+<script> // ************** JavaScript **************
 
-	var havePointLock = 'pointerLockElement' in document;
-	var cameraPick = 1;
-	var relativeOrbitPosition = 1;
+// Scene variables
+var camera, controls, orbit, orbitControls, scene, renderer;
 
-	if(havePointLock) {
-		var pointerlockchange = function (event) {
-			if(document.pointerLockElement === document.body){
-				console.log('PointerLock enabled');
-				controlsEnabled = true;
-				controls.enabled = true;
-			} else {
-				console.log('PointerLock disabled');
-				controls.enabled = false;
-			}
+var havePointLock = 'pointerLockElement' in document;
+var cameraPick = 1;
+var relativeOrbitPosition = 1;
+
+if(havePointLock) {
+	var pointerlockchange = function (event) {
+		if(document.pointerLockElement === document.body){
+			console.log('PointerLock enabled');
+			controlsEnabled = true;
+			controls.enabled = true;
+		} else {
+			console.log('PointerLock disabled');
+			controls.enabled = false;
 		}
 	}
+}
 
-	var pointerlockerror = function (event) {
-		console.log('Error!');
-	}
+var pointerlockerror = function (event) {
+	console.log('Error!');
+}
+var controlsEnabled = false;
+
+var balloon, plane;
+
+initScene();
+loadWorld();
+animate();
+// Builds camera, camera controls, scene and renderer
+function initScene() {
 
 	document.addEventListener('pointerlockchange', pointerlockchange, false);
 	document.addEventListener('pointerlockerror', pointerlockerror, false);
 
-	init();
-	loadWorld();
-	animate();
+	// Camera 1
+	orbit = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+	orbit.position.z = 10;
 
-	var controlsEnabled = false;
+	// Camera 2
+	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
 
+	// Scene
+	scene = new THREE.Scene();
+	scene.background = new THREE.Color(0xF0F8FF);
+	scene.fog = new THREE.FogExp2(0x25FCB9, 0.0009);
 
-	function init() {
+	// Renderer
+	renderer = new THREE.WebGLRenderer({antialias: true});
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(renderer.domElement);
 
-		// Camera 1
-		orbit = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-		orbit.position.z = 10;
+	// OrbitControls
+	orbitControls = new THREE.OrbitControls(orbit, renderer.domElement);
+	orbitControls.addEventListener('change', render);
+	orbitControls.enableZoom = false;
+	orbitControls.enablePan = false;
+	orbitControls.autoRotate = true;
 
-		// Camera 2
-		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+	// PointerLockControls
+	controls = new THREE.PointerLockControls(camera);
+	scene.add(controls.getObject());
 
-		// Scene
-		scene = new THREE.Scene();
-		scene.background = new THREE.Color(0xF0F8FF);
-		scene.fog = new THREE.FogExp2(0x25FCB9, 0.0009);
+	document.addEventListener('keydown', onDocumentKeyDown, false);
+	document.addEventListener("keyup", onDocumentKeyUp, false);
+	window.addEventListener('resize', onWindowResize, false);
+	document.addEventListener( 'wheel', onMouseWheel);
+}
 
-		// Renderer
-		renderer = new THREE.WebGLRenderer({antialias: true});
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		document.body.appendChild(renderer.domElement);
+function loadWorld() {
 
-		// OrbitControls
-		orbitControls = new THREE.OrbitControls(orbit, renderer.domElement);
-		orbitControls.addEventListener('change', render);
-		orbitControls.enableZoom = false;
+	// Sphere
+	var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+	var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+	balloon = new THREE.Mesh( geometry, material );
+	scene.add( balloon );
 
-		// PointerLockControls
-		controls = new THREE.PointerLockControls(camera);
-		scene.add(controls.getObject());
+	var planeGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
+	var planeMaterial = new THREE.MeshNormalMaterial();
+	plane = new THREE.Mesh(planeGeometry, planeMaterial);
+	plane.rotation.x = Math.PI / 2;
+	plane.position.y = -2.5;
+	plane.material.side = THREE.DoubleSide;
+	scene.add(plane);
 
-		var onKeyDown = function (event) {
-			switch (event.keyCode) {
-				case 86: //v
-					cameraPick = 2;
-					console.log(cameraPick);
-					document.body.requestPointerLock();
-					break;
-				case 67: //c
-					cameraPick = 1;
-					console.log(cameraPick);
-					document.exitPointerLock();
-					break;
-			}
+	scene.add( arrowHelper ); //TODO SET THIS IN THA HOOD
+}
 
-		};
+function onWindowResize() {
+	camera.ascpet = orbit.ascpet = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	orbit.updateProjectionMatrix();
 
-		document.addEventListener('keydown', onKeyDown, false);
-		window.addEventListener('resize', onWindowResize, false);
-		document.addEventListener( 'wheel', onMouseWheel);
-	}
+	renderer.setSize(window.innerWidth, window.innerHeight);
 
-	var sphere, plane;
-	function loadWorld()
-	{
-		// Sphere
-		var geometry = new THREE.SphereGeometry( 5, 32, 32 );
-		var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-		sphere = new THREE.Mesh( geometry, material );
-		scene.add( sphere );
+}
 
-		var planeGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
-		var planeMaterial = new THREE.MeshNormalMaterial();
-		plane = new THREE.Mesh(planeGeometry, planeMaterial);
-		plane.rotation.x = Math.PI / 2;
-		plane.position.y = -2.5;
-		plane.material.side = THREE.DoubleSide;
-		scene.add(plane);
+// Put all animations in here instead of in render().
+function animate() {
+	setTimeout( function() {
 
-	}
-
-	function onWindowResize() {
-		camera.ascpet = orbit.ascpet = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-		orbit.updateProjectionMatrix();
-
-		renderer.setSize(window.innerWidth, window.innerHeight);
-
-	}
-
-	function animate() {
 		requestAnimationFrame(animate);
 
-		sphere.position.y += 0.1;
 
 
-		orbitControls.target.set(sphere.position.x, sphere.position.y, sphere.position.z);
-		orbit.position.y = sphere.position.y + relativeOrbitPosition;
-		camera.position.y = sphere.position.y;
+
+		// ************** ANIMATIONS **************
+		CalcForces();
+		CalcPosition();
+		WindUpdate();
+
+		orbitControls.target.set(balloon.position.x, balloon.position.y, balloon.position.z);
+		orbit.position.y = balloon.position.y + relativeOrbitPosition;
+		camera.position.x = balloon.position.x;
+		camera.position.y = balloon.position.y;
+		camera.position.z = balloon.position.z;
 
 		orbitControls.update();
 
+		console.log(balloonTemp)
+		// ************** ANIMATIONS **************
+	}, 1000 / fps );
 
-		render();
-	}
+	render();
+}
 
-	function render() {
+// KEEP THIS CLEAN.
+function render() {
 
-		// Decides which camera will be used
-		if(cameraPick === 1)
-			renderer.render(scene, orbit);
-		else if(cameraPick === 2)
-			renderer.render(scene, camera);
-		else
-			console.log('Your controls seem to have fucked up');
-	}
+	// Decides which camera will be used
+	if(cameraPick === 1)
+		renderer.render(scene, orbit);
+	else if(cameraPick === 2)
+		renderer.render(scene, camera);
+	else
+		console.log('Your controls seem to have fucked up');
+}
+
 
 
 </script>
-
+</body>
 </html>

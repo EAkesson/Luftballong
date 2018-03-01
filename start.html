@@ -26,6 +26,11 @@
 		<script src="js/controls/PointerLockControls.js"></script>
 		<!--KEY-->
 		<script src="EEkEy.js"></script>
+		<!--Obj-->
+		<script src ="js/loaders/OBJLoader.js"></script>
+		<script src ="js/loaders/MTLLoader.js"></script>
+		<script src ="js/loaders/DDSLoader.js"></script>
+		<script src ="objectLoad.js"></script>
 
         <script> // ************** JavaScript **************
 
@@ -92,7 +97,7 @@
 			// PointerLockControls
 			controls = new THREE.PointerLockControls(camera);
 			scene.add(controls.getObject());
-
+			
 			document.addEventListener('keydown', onDocumentKeyDown, false);
 			document.addEventListener("keyup", onDocumentKeyUp, false);
 			window.addEventListener('resize', onWindowResize, false);
@@ -102,10 +107,19 @@
 		function loadWorld() {
 
 			// Sphere
-			var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+			/*var geometry = new THREE.SphereGeometry( 5, 32, 32 );
 			var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 			balloon = new THREE.Mesh( geometry, material );
-			scene.add( balloon );
+			scene.add( balloon );*/
+
+			var objToLoad = ['balloon/Air_Balloon/Air_Balloon.obj']; // String array to add filepath to the obj file that we want to load
+			var mtlToLoad = ['balloon/Air_Balloon/Air_Balloon.mtl']; //// String array to add filepath to the mtl file that we want to load
+			var objPos = [new THREE.Vector3(0,0,0)];
+			objectLoad(objToLoad, mtlToLoad, objPos); //Loaded object can be found using filename in childrens of scene
+
+			setTimeout( function() {
+				balloon = scene.getObjectByName("Air_Balloon");
+			}, 1000);
 
 			var planeGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
 			var planeMaterial = new THREE.MeshNormalMaterial();
@@ -114,6 +128,9 @@
 			plane.position.y = -2.5;
 			plane.material.side = THREE.DoubleSide;
 			scene.add(plane);
+
+			var ambient = new THREE.AmbientLight('#fff'); // Important to be able to see any object loaded my objectLoad()
+			scene.add(ambient);
 
 			scene.add( arrowHelper ); //TODO SET THIS IN THA HOOD
 		}
