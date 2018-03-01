@@ -32,6 +32,8 @@
 		<script src ="js/loaders/DDSLoader.js"></script>
 		<script src ="objectLoad.js"></script>
 
+		<script src ="Objects.js"></script>
+
         <script> // ************** JavaScript **************
 
 		// Scene variables
@@ -106,6 +108,7 @@
 
 		function loadWorld() {
 
+
 			// Sphere
 			/*var geometry = new THREE.SphereGeometry( 8, 32, 32 );
 			var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
@@ -114,10 +117,8 @@
 			tetttt.position.y = 8;*/
 
 
-			//var objToLoad = ['balloon/Air_Balloon/realSizeBalloon1.obj']; // String array to add filepath to the obj file that we want to load
-			var objToLoad = ['EnviModels/restart/Tree4.obj']; // String array to add filepath to the obj file that we want to load
-			//var mtlToLoad = ['balloon/Air_Balloon/realSizeBalloon1.mtl']; //// String array to add filepath to the mtl file that we want to load
-			var mtlToLoad = ['EnviModels/restart/Tree4.mtl']; //// String array to add filepath to the mtl file that we want to load
+			var objToLoad = ['balloon/Air_Balloon/realSizeBalloon1.obj']; // String array to add filepath to the obj file that we want to load
+			var mtlToLoad = ['balloon/Air_Balloon/realSizeBalloon1.mtl']; //// String array to add filepath to the mtl file that we want to load
 			var objPos = [new THREE.Vector3(0,0,0)];
 			objectLoad(objToLoad, mtlToLoad, objPos); //Loaded object can be found using filename in childrens of scene
 
