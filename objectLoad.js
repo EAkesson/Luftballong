@@ -13,32 +13,34 @@ function objectLoad( objPaths, mtlPath, posArray) {
 
 	THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader()); // Not really sure what this is doing
 
-	var objLoader = new THREE.OBJLoader(); //Creates loader
-	var mtlLoader = new THREE.MTLLoader();
-
 	for (var i = 0; i < objPaths.length; i++) {
-		createObj(objLoader, mtlLoader, objPaths[i], mtlPath[i], posArray[i]);
+		createObj(objPaths[i], mtlPath[i], posArray[i]);
 	}
 }
 
-function createObj(objLoader, mtlLoader, object, mtl,  pos){
+function createObj(object, mtl,  pos){
+
+	var mtlLoader = new THREE.MTLLoader();
 
 	mtlLoader.setMaterialOptions({ side: THREE.DoubleSide});
 	mtlLoader.load(mtl, function (materials) {
 
 		materials.preload();
-		loadObj(objLoader, object, pos, materials);
+		loadObj(object, pos, materials);
 	}, onProgress , onError)
 }
 
-function loadObj(objLoader, object, pos, materials){
+function loadObj(object, pos, materials){
+
+	var objLoader = new THREE.OBJLoader();
 
 	objLoader.setMaterials( materials );
 	objLoader.load(object, function(group) {
-		group.position.x = pos.x;
-		group.position.y = pos.y;
-		group.position.z = pos.z;
-		group.name = object.toString().split('.')[0].split("/").reverse()[0];
-		scene.add(group);
+		obj = group;
+		obj.position.x = pos.x;
+		obj.position.y = pos.y;
+		obj.position.z = pos.z;
+		obj.name = object.toString().split('.')[0].split("/").reverse()[0];
+		scene.add(obj);
 	}, onProgress , onError)
 }
