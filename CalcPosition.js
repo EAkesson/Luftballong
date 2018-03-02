@@ -4,7 +4,7 @@ function CalcPosition() {
 	balloonTotalMass = balloonWeight + atmosphericPressure/(ideelGasConst*balloonTemp)*balloonVolume;
 
 	//Y-AXIS VELOCITY AND POSISTION
-	if(balloon.position.y <= earthRadius + 5){
+	if(balloon.position.y <= earthRadius){
 		balloonSpeed.y = Math.max(balloonSpeed.y + steplength*(forceY/balloonTotalMass) , 0) //If the balloon touches the ground neglect negative acceleration
 	}else{
 		balloonSpeed.y = balloonSpeed.y + steplength*(forceY/balloonTotalMass);

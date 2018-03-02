@@ -9,16 +9,21 @@ var onProgress = function ( xhr ) {
 
 var onError = function ( xhr ) { };
 
-function objectLoad( objPaths, mtlPath, posArray) {
+function objectLoad( objPaths, mtlPath, posArray, rotarr, paren) {
 
 	THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader()); // Not really sure what this is doing
 
 	for (var i = 0; i < objPaths.length; i++) {
-		createObj(objPaths[i], mtlPath[i], posArray[i]);
+		if(arguments.length == 5){
+			createObj(objPaths[i], mtlPath[i], posArray[i], rotarr[i], paren);
+		}else{
+			createObj(objPaths[i], mtlPath[i], posArray[i], rotarr, paren);
+		}
+
 	}
 }
 
-function createObj(object, mtl,  pos){
+function createObj(object, mtl,  pos, rot, paren){
 
 	var mtlLoader = new THREE.MTLLoader();
 
@@ -26,11 +31,11 @@ function createObj(object, mtl,  pos){
 	mtlLoader.load(mtl, function (materials) {
 
 		materials.preload();
-		loadObj(object, pos, materials);
+		loadObj(object, pos, materials, rot, paren);
 	}, onProgress , onError)
 }
 
-function loadObj(object, pos, materials){
+function loadObj(object, pos, materials, rot, paren){
 
 	var objLoader = new THREE.OBJLoader();
 
@@ -41,6 +46,15 @@ function loadObj(object, pos, materials){
 		obj.position.y = pos.y;
 		obj.position.z = pos.z;
 		obj.name = object.toString().split('.')[0].split("/").reverse()[0];
-		scene.add(obj);
+		console.log(arguments.length);
+		if(paren != undefined){
+			obj.rotation.z = -rot.x;
+			obj.rotation.y = -rot.y;
+			paren.add(obj);
+		}else{
+			console.log("hej")
+			scene.add(obj);
+		}
+
 	}, onProgress , onError)
 }

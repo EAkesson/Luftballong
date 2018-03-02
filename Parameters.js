@@ -30,4 +30,4 @@
 	var parachuteVentDC = 0.65; //Discharge Coefficient for a chimney
 	var parachuteVentOpen = false;
 
-	var earthRadius = 2000; // Radius of the earth sphere
+	var earthRadius = 500; // Radius of the earth sphere

@@ -117,9 +117,9 @@
 			tetttt.position.y = 8;*/
 
 
-			var objToLoad = ['balloon/Air_Balloon/realSizeBalloon1.obj']; // String array to add filepath to the obj file that we want to load
-			var mtlToLoad = ['balloon/Air_Balloon/realSizeBalloon1.mtl']; //// String array to add filepath to the mtl file that we want to load
-			var objPos = [new THREE.Vector3(0,0,0)];
+			var objToLoad = ['balloon/Air_Balloon/realSizeBalloon1.obj', 'balloon/Air_Balloon/realSizeBalloon1.obj', 'balloon/Air_Balloon/realSizeBalloon1.obj']; // String array to add filepath to the obj file that we want to load
+			var mtlToLoad = ['balloon/Air_Balloon/realSizeBalloon1.mtl', 'balloon/Air_Balloon/realSizeBalloon1.mtl', 'balloon/Air_Balloon/realSizeBalloon1.mtl']; //// String array to add filepath to the mtl file that we want to load
+			var objPos = [new THREE.Vector3(0,0,0), new THREE.Vector3(4,3,2), new THREE.Vector3(1,1,1)];
 			objectLoad(objToLoad, mtlToLoad, objPos); //Loaded object can be found using filename in childrens of scene
 
 			setTimeout( function() {
