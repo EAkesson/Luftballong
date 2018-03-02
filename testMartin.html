@@ -32,13 +32,17 @@
 <script src ="js/loaders/OBJLoader.js"></script>
 <script src ="js/loaders/MTLLoader.js"></script>
 <script src ="js/loaders/DDSLoader.js"></script>
+<script src ="js/loaders/TGALoader.js"></script>
 <script src ="objectLoad.js"></script>
 <script src ="enviLoad.js"></script>
 
 <script src ="Objects.js"></script>
 
-<script> // ************** JavaScript **************
 
+<script> // ************** JavaScript **************
+//TODO check fps and if it runs correctly
+//TODO fix so everything loads in right order
+//TODO
 // Scene variables
 var camera, controls, orbit, orbitControls, scene, renderer;
 
@@ -64,23 +68,25 @@ var pointerlockerror = function (event) {
 }
 var controlsEnabled = false;
 
-var balloon, earth;
-
+var balloon, earth, skyBox;
+var light;
 initScene();
 loadWorld();
 animate();
 // Builds camera, camera controls, scene and renderer
 function initScene() {
 
+
+
 	document.addEventListener('pointerlockchange', pointerlockchange, false);
 	document.addEventListener('pointerlockerror', pointerlockerror, false);
 
 	// Camera 1
-	orbit = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+	orbit = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
 	orbit.position.z = 100;
 
 	// Camera 2
-	camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+	camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 2000);
 
 	// Scene
 	scene = new THREE.Scene();
@@ -90,6 +96,8 @@ function initScene() {
 	// Renderer
 	renderer = new THREE.WebGLRenderer({antialias: true});
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	document.body.appendChild(renderer.domElement);
 
 	// OrbitControls
@@ -168,5 +176,7 @@ function render() {
 
 
 </script>
+
+
 </body>
 </html>

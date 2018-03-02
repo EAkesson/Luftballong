@@ -1,13 +1,13 @@
 var obj;
 
-var onProgress = function ( xhr ) {
+/*var onProgress = function ( xhr ) {
 	if ( xhr.lengthComputable ) {
 		var percentComplete = xhr.loaded / xhr.total * 100;
 		console.log( Math.round(percentComplete) + '% downloaded' );
 	}
 };
 
-var onError = function ( xhr ) { };
+var onError = function ( xhr ) { };*/
 
 function objectLoad( objPaths, mtlPath, posArray, rotarr, paren) {
 
@@ -15,15 +15,15 @@ function objectLoad( objPaths, mtlPath, posArray, rotarr, paren) {
 
 	for (var i = 0; i < objPaths.length; i++) {
 		if(arguments.length == 5){
-			createObj(objPaths[i], mtlPath[i], posArray[i], rotarr[i], paren);
+			createObj(objPaths[i], mtlPath[i], posArray[i], paren, rotarr[i]);
 		}else{
-			createObj(objPaths[i], mtlPath[i], posArray[i], rotarr, paren);
+			createObj(objPaths[i], mtlPath[i], posArray[i], paren, rotarr);
 		}
 
 	}
 }
 
-function createObj(object, mtl,  pos, rot, paren){
+function createObj(object, mtl,  pos, paren, rot ){
 
 	var mtlLoader = new THREE.MTLLoader();
 
@@ -31,11 +31,11 @@ function createObj(object, mtl,  pos, rot, paren){
 	mtlLoader.load(mtl, function (materials) {
 
 		materials.preload();
-		loadObj(object, pos, materials, rot, paren);
-	}, onProgress , onError)
+		loadObj(object, pos, materials, paren, rot );
+	})
 }
 
-function loadObj(object, pos, materials, rot, paren){
+function loadObj(object, pos, materials, paren, rot){
 
 	var objLoader = new THREE.OBJLoader();
 
@@ -46,15 +46,26 @@ function loadObj(object, pos, materials, rot, paren){
 		obj.position.y = pos.y;
 		obj.position.z = pos.z;
 		obj.name = object.toString().split('.')[0].split("/").reverse()[0];
-		console.log(arguments.length);
+
+		obj.children.forEach(function (item) {
+			item.castShadow = true;
+			item.receiveShadow = true;
+		}		);
+		//console.log(obj.children.);
+		//obj.children.receiveShadow = false;
+
 		if(paren != undefined){
 			obj.rotation.z = -rot.x;
 			obj.rotation.y = -rot.y;
+
+			obj.scale.x = 2;
+			obj.scale.y = 2;
+			obj.scale.z = 2;
 			paren.add(obj);
 		}else{
-			console.log("hej")
 			scene.add(obj);
+
 		}
 
-	}, onProgress , onError)
+	})
 }

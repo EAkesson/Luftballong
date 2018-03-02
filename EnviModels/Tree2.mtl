@@ -24,5 +24,5 @@ newmtl Material_008
 	Kd 0.0078 0.3835 0.0027
 	Ks 0.2500 0.2500 0.2500
 	Ke 0.0000 0.0000 0.0000
-	map_Ka maps\green.psd
-	map_Kd maps\green.psd
+	map_Ka EnviModels\maps\green.psd
+	map_Kd EnviModels\maps\green.psd

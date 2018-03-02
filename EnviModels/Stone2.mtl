@@ -12,8 +12,8 @@ newmtl Material_004
 	Kd 0.6400 0.6400 0.6400
 	Ks 0.2500 0.2500 0.2500
 	Ke 0.0000 0.0000 0.0000
-	map_Ka maps\Stone.png
-	map_Kd maps\Stone.png
+	map_Ka EnviModels\maps\Stone.png
+	map_Kd EnviModels\maps\Stone.png
 
 newmtl Material_001
 	Ns 32.6421
@@ -26,8 +26,8 @@ newmtl Material_001
 	Kd 0.6400 0.6400 0.6400
 	Ks 0.2500 0.2500 0.2500
 	Ke 0.0000 0.0000 0.0000
-	map_Ka maps\Stone.png
-	map_Kd maps\Stone.png
+	map_Ka EnviModels\maps\Stone.png
+	map_Kd EnviModels\maps\Stone.png
 
 newmtl Material_003
 	Ns 32.6421
@@ -40,8 +40,8 @@ newmtl Material_003
 	Kd 0.6400 0.6400 0.6400
 	Ks 0.2500 0.2500 0.2500
 	Ke 0.0000 0.0000 0.0000
-	map_Ka maps\Stone.png
-	map_Kd maps\Stone.png
+	map_Ka EnviModels\maps\Stone.png
+	map_Kd EnviModels\maps\Stone.png
 
 newmtl Material_002
 	Ns 32.6421
@@ -54,5 +54,5 @@ newmtl Material_002
 	Kd 0.6400 0.6400 0.6400
 	Ks 0.2500 0.2500 0.2500
 	Ke 0.0000 0.0000 0.0000
-	map_Ka maps\Stone.png
-	map_Kd maps\Stone.png
+	map_Ka EnviModels\maps\Stone.png
+	map_Kd EnviModels\maps\Stone.png
