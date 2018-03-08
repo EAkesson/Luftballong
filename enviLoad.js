@@ -16,7 +16,7 @@ function enviLoad(){
 	var posforEnvObj = new Array();
 	var rot = new Array();
 
-	var numofTrees = 1500;
+	var numofTrees = 500;
 	var numofStones = 100;
 	var numofGrass = 100;
 	var numofFenc = 20;

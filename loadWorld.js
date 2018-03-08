@@ -27,9 +27,9 @@ function loadWorld() {
 	earth = new THREE.Mesh( earthGeometry, earthMaterial );
 	earth.receiveShadow = true;
 	scene.add( earth );
-	earth.rotation.x = 1;
+	earth.rotation.x = 0.51;
 
-		var geometry = new THREE.SphereGeometry(earthRadius+200, 60, 40);
+		var geometry = new THREE.SphereGeometry(earthRadius+400, 60, 40);
 	var material = new THREE.MeshPhongMaterial( {
 		map: new THREE.TextureLoader().load("EnviModels/Sky019.jpg")
 	} );
@@ -42,8 +42,8 @@ function loadWorld() {
 	var ambient = new THREE.AmbientLight('#777', 1.2); // Important to be able to see any object loaded my objectLoad()
 	scene.add(ambient);
 
-	light = new THREE.PointLight( 0xf55e2f, 10, 300, 2);
-	light.position.set( 50, earthRadius + 100, -100 );
+	light = new THREE.PointLight( 0xf55e2f, 20, 400, 2);
+	light.position.set( 50, earthRadius + 200, -100 );
 	light.castShadow = true;            // default false
 
 	earth.add( light );
